@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h1>
+    CHATS
+  </h1>
+ 
+  <ul>
+    <li *ngFor="let item of items | async">
+      
+      <a ng-show="validItem(item)"> asd </a>
+      
+      <!-- {{ (item[0].name | json) }} -->
+    </li>
+  </ul> 
+  
+</ion-content>
