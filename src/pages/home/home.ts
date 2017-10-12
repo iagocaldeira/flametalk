@@ -4,34 +4,24 @@ import { NavController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
+import { ChatPage } from '../chat/chat';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
 
-  items: Observable<any[]>;
+  rooms: Observable<any[]>;
+  members: Observable<any[]>;
 
   constructor(public navCtrl: NavController, db: AngularFireDatabase) {
-
-    this.items = db.list('rooms').valueChanges();
-
-    console.log(this.items);
-
+    this.rooms = db.list('rooms').valueChanges();
+    this.members = db.list('members').valueChanges();
+  }
+ 
+  changePage(id){
+    this.navCtrl.push(ChatPage, {chatId: id});
   }
 
-  validItem(anythinbg: any){
-    console.log(anythinbg);
-
-    return false;
-  }
-  
 }
-
-
-// {
-//   "rules": {
-//     ".read": "auth != null",
-//       ".write": "auth != null"
-//   }
-// }

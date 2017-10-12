@@ -1,23 +1,35 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Flametalk
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <h1>
-    CHATS
+    CHAT
   </h1>
  
-  <ul>
-    <li *ngFor="let item of items | async">
-      
-      <a ng-show="validItem(item)"> asd </a>
-      
-      <!-- {{ (item[0].name | json) }} -->
-    </li>
-  </ul> 
-  
+  <h2>Salas</h2>
+
+  <ion-list>
+    <button ion-item *ngFor="let room of rooms | async" (click)="changePage(room.id)">
+      {{room.name}}
+    </button>
+  </ion-list>
+
+    <h2>Usuários</h2>
+
+  <ion-list>
+    <ion-item *ngFor="let member of members | async">
+      <ion-avatar item-start>
+        <img src="http://entretenimento.r7.com/blogs/fabiola-reipert/files/2015/10/nego-do-borel.jpg">
+      </ion-avatar>
+      <h2>{{member.name}}</h2>
+      <h3>{{member.email}}</h3>
+      <p>{{member.status}}</p>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

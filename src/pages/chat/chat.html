@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>chat</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+<br><br><br>
+
+
+<br><br><br>
+
+
+  <ion-list>
+    <ion-item *ngFor="let message of messages | async">
+      <h2>{{getMember(message.owner)}}</h2>
+      <p>{{message.text}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
