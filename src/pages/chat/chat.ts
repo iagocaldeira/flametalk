@@ -14,13 +14,17 @@ export class ChatPage {
   members: Observable<any[]>;
 
   localNames: any[];
+  message: string = "";
 
-  chatId: number = 0;
+  chatInfo = {
+    chatId: 0, 
+    chatName: "..."
+  };
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase) {
-    // this.chatId = navParams.data.chatId;
-    this.chatId = 0;
-    this.messages = db.list("messages/" + this.chatId).valueChanges();
+    this.chatInfo.chatId = navParams.data.chatId;
+    // this.chatInfo.chatName = navParams.data.chatName;
+    this.messages = db.list("messages/" + this.chatInfo.chatId).valueChanges();
     this.members = db.list("members").valueChanges();
   }
 
@@ -38,5 +42,11 @@ export class ChatPage {
     return this.members[id];
   }
 
+
+  sendMessage(){
+    let messageId = new Date().getTime();
+    const itemRef = this.db.object("messages/" + this.chatInfo.chatId + "/" + messageId);
+    itemRef.set({ id: new Date().getTime(), owner: 0, text: this.message });
+  }
 
 }

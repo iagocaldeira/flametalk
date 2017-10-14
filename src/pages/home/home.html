@@ -1,26 +1,21 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Flametalk
+      <ion-icon name="bonfire"></ion-icon>&nbsp;Flametalk
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h1>
-    CHAT
-  </h1>
- 
-  <h2>Salas</h2>
+<ion-content>
 
+  <h2>Channels</h2>
   <ion-list>
-    <button ion-item *ngFor="let room of rooms | async" (click)="changePage(room.id)">
+    <button ion-item *ngFor="let room of rooms | async" (click)="changePage(room.id, room.name)">
       {{room.name}}
     </button>
   </ion-list>
 
-    <h2>Usuários</h2>
-
+  <h2>Users</h2>
   <ion-list>
     <ion-item *ngFor="let member of members | async">
       <ion-avatar item-start>
