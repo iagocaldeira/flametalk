@@ -20,8 +20,8 @@ export class HomePage {
     this.members = db.list('members').valueChanges();
   }
  
-  changePage(id){
-    this.navCtrl.push(ChatPage, {chatId: id});
+  changePage(id: number, name: string) {
+    this.navCtrl.push(ChatPage, {chatId: id, chatName: name});
   }
 
 }

@@ -1,3 +1,51 @@
-page-chat {
+@import "bg.scss";
 
+.message-container{
+    .message{
+        width: 100%;
+
+        .message-blob {    
+            width: 70%;
+            background: #e8e8e8;
+            position: relative;
+            margin: 16px 30px 16px 30px;
+            padding: 10px;
+
+            .owner{
+                font-weight: 300;
+            }
+        }
+
+        .message-blob.normal-message{
+            border-radius: 10px 10px 10px 0px;
+        }
+
+        .message-blob.my-message{
+            float: right;
+            border-radius: 10px 10px 0px 10px;
+        }
+
+        .message-blob.normal-message:before {
+            content: "";
+            position: absolute;
+            right: 100%;
+            bottom: 0px;
+            width: 0;
+            height: 0;
+            border-top: 13px solid transparent;
+            border-right: 11px solid #e8e8e8;
+            border-bottom: 0px solid transparent;
+        }
+
+        .message-blob.my-message:before {
+            content: "";
+            position: absolute;
+            left: 100%;
+            bottom: 0px;
+            width: 0;
+            height: 0;
+            border-top: 13px solid transparent;
+            border-left: 11px solid #e8e8e8;
+        }
+    }
 }
