@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, NavParams, Content } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'chat.html',
 })
 export class ChatPage {
+
+  @ViewChild('content') content:any;
 
   messages: Observable<any[]>;
   members: Observable<any[]>;
@@ -28,10 +30,15 @@ export class ChatPage {
     this.members = db.list("members").valueChanges();
   }
 
-  ionViewDidLoad() {
+  
+  ionViewDidLoad()
+  {
+      console.log( this.content.nativeElement);
+
+     setTimeout(() => {
+      this.content.nativeElement.scrollTo(100, 100);
+     }, 1000);
   }
-
-
 
   getMember(id: any) {
 

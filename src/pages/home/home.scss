@@ -1,3 +1,141 @@
-page-home {
+
+$datyellow: #FDC304;
+
+page-home{
+
+    //
+    // background-options
+    //
+
+    background-color: black;
+
+    .background-image-blured{    
+        
+        background-image: url(../assets/original-bg.jpg);
+        background-size: cover;
+        background-position: center;
+
+        z-index: -5;
+        left: -15px;
+        top: -15px;
+        position: fixed;
+        display: block;
+
+        width: calc(100% + 30px);
+        height: calc(100vh + 30px);
+
+        -webkit-filter: brightness(0.3) blur(8px);
+        -moz-filter: brightness(0.3) blur(8px);
+        -o-filter: brightness(0.3) blur(8px);
+        -ms-filter: brightness(0.3) blur(8px);
+        filter: brightness(0.3) blur(8px);
+    }
+    
+    .toolbar-background-md {
+        background: transparent;
+    }
+
+    ion-content{
+        background: transparent !important;
+        color: white !important;
+    }
+
+    //
+    // title-options
+    //
+
+    ion-title{
+        text-transform: uppercase;
+        font-weight: 100;
+        text-align: center;
+            
+        .toolbar-title-md {
+            color: white;
+            font-weight: 100;
+        }
+    }
+
+    
+    //
+    // tab-options
+    //
+
+    .tab-options{
+        padding: 10px;
+
+        .tab-item{
+            height: 30px;
+            background-color: #ffffff21;
+            color: #ffffff9c;
+            font-weight: lighter;
+            display: inline-block;
+            margin-right: 10px;
+            border-radius: 20px;
+            padding: 6px 19px 6px 15px;
+            font-size: 15px;
+            text-transform: uppercase;
+            font-weight: 400;
+        }
+
+        .active{
+            background-color: $datyellow;
+            color: white;
+        }
+    }
+
+    .tab-container{
+        padding: 10px;
+    }
+
+    .tab-date{    
+        width: 170px;
+        color: white;
+        background-color: transparent;
+        border-style: solid;
+        border-width: 1px;
+        border-color: white;
+        padding: 6px 6px;
+        font-weight: 100;
+        position: absolute;
+        bottom: 15px;
+        margin-left: calc(50% - 85px);
+        text-align: center;
+        border-radius: 12px;
+    }
+
+    //
+    // channels-options
+    //
+    
+    .channel-button{
+        ion-avatar.contacts{
+            font-size: 40px;
+            color: white;
+        }
+        ion-avatar.go{
+            font-size: 40px;
+            color: $datyellow;
+        }
+    }
+
+    .item-md {
+        background-color: transparent;
+    }
+
+    .list-md .item-block .item-inner {
+        border: none;
+        color: white;
+        font-size: 23px;
+        clear: both;
+    }
+
+    //
+    // users-options
+    //
+
+    .profile-icon{
+        font-size: 40px;
+        color: white;
+    }
 
 }

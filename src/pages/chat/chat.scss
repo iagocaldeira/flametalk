@@ -1,4 +1,59 @@
-@import "bg.scss";
+
+$datyellow: #FDC304;
+
+page-chat{
+    //
+    // background-options
+    //
+
+    background-color: black;
+
+    .background-image-blured{    
+        
+        background-image: url(../assets/original-bg.jpg);
+        background-size: cover;
+        background-position: center;
+
+        z-index: -5;
+        left: -15px;
+        top: -15px;
+        position: fixed;
+        display: block;
+
+        width: calc(100% + 30px);
+        height: calc(100vh + 30px);
+
+        -webkit-filter: brightness(0.3) blur(8px);
+        -moz-filter: brightness(0.3) blur(8px);
+        -o-filter: brightness(0.3) blur(8px);
+        -ms-filter: brightness(0.3) blur(8px);
+        filter: brightness(0.3) blur(8px);
+    }
+    
+    .toolbar-background-md {
+        background: transparent;
+    }
+
+    ion-content{
+        background: transparent !important;
+        color: white !important;
+    }
+
+    //
+    // title-options
+    //
+
+    ion-title{
+        text-transform: uppercase;
+        font-weight: 100;
+        text-align: center;
+            
+        .toolbar-title-md {
+            color: $datyellow;
+            font-weight: 100;
+        }
+    }
+}
 
 .message-container{
     .message{
@@ -6,7 +61,7 @@
 
         .message-blob {    
             width: 70%;
-            background: #e8e8e8;
+            background: rgba(255, 255, 255, 0.17);
             position: relative;
             margin: 16px 30px 16px 30px;
             padding: 10px;
@@ -33,7 +88,7 @@
             width: 0;
             height: 0;
             border-top: 13px solid transparent;
-            border-right: 11px solid #e8e8e8;
+            border-right: 11px solid rgba(255, 255, 255, 0.17);
             border-bottom: 0px solid transparent;
         }
 
@@ -45,7 +100,25 @@
             width: 0;
             height: 0;
             border-top: 13px solid transparent;
-            border-left: 11px solid #e8e8e8;
+            border-left: 11px solid rgba(255, 255, 255, 0.17);
         }
+    }
+}
+
+.sender-input{
+    background-color: rgba(255, 255, 255, 0.18);
+    margin-left: -5px;
+    width: calc(100% + 10px);
+    height: 50px;
+    margin-bottom: -6px;
+    color: white;
+    
+    .item-md.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: transparent;
+    }
+
+    .sender-icon{
+        color: $datyellow
     }
 }

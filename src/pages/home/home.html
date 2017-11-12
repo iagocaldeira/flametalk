@@ -1,3 +1,4 @@
+<div class="background-image-blured"></div>
 <ion-header>
   <ion-navbar>
     <ion-title>
@@ -8,23 +9,42 @@
 
 <ion-content>
 
-  <h2>Channels</h2>
-  <ion-list>
-    <button ion-item *ngFor="let room of rooms | async" (click)="changePage(room.id, room.name)">
-      {{room.name}}
-    </button>
-  </ion-list>
+  <div class="tab-options">
+    <div class="tab-item" (click)="selectTab(0)" [ngClass]="{'active': (tabItem == 0)}">
+      channels
+    </div>
+    <div class="tab-item" (click)="selectTab(1)" [ngClass]="{'active': (tabItem == 1)}">
+      users
+    </div>
+  </div>
+  
+  <div class="tab-container">
 
-  <h2>Users</h2>
-  <ion-list>
-    <ion-item *ngFor="let member of members | async">
-      <ion-avatar item-start>
-        <img src="http://entretenimento.r7.com/blogs/fabiola-reipert/files/2015/10/nego-do-borel.jpg">
-      </ion-avatar>
-      <h2>{{member.name}}</h2>
-      <h3>{{member.email}}</h3>
-      <p>{{member.status}}</p>
-    </ion-item>
-  </ion-list>
+    <ion-list *ngIf="tabItem == 0">
+      <button class="channel-button" ion-item *ngFor="let room of rooms | async" (click)="changePage(room.id, room.name)">
+        <ion-avatar class="contacts" item-start>
+          <ion-icon name="ios-contacts-outline"></ion-icon> 
+        </ion-avatar>
+        <h2>{{room.name}}</h2>
+        <p>Entrar em {{room.name}} &nbsp;&nbsp;<span class="datyellow">●</span>&nbsp;&nbsp;Código {{room.id}}</p>
+        <ion-avatar class="go" item-end>
+            <ion-icon name="ios-play-outline"></ion-icon> 
+        </ion-avatar>
+      </button>
+    </ion-list>
 
+    <ion-list *ngIf="tabItem == 1">
+      <ion-item *ngFor="let member of members | async">
+        <ion-avatar class="profile-icon" item-start>
+            <ion-icon name="ios-contact-outline"></ion-icon> 
+        </ion-avatar>
+        <h2>{{member.name}}</h2>
+        <h3>{{member.email}}</h3>
+        <p>Status atual &nbsp;&nbsp;<span class="datyellow">●</span>&nbsp;&nbsp;{{member.status}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="tab-date">
+    {{getDateString()}}
+  </div>
 </ion-content>
