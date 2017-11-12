@@ -12,6 +12,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import 'rxjs/add/operator/take';
+import { MemberProvider } from '../providers/member/member';
 export const firebaseConfig = {
   apiKey: "AIzaSyCTYnskFxmiz8DAhY7rVgR-x8Pu5fs0VN4",
   authDomain: "flametalk-57619.firebaseapp.com",
@@ -43,7 +44,8 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MemberProvider
   ]
 })
 export class AppModule {}

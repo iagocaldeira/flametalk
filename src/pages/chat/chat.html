@@ -8,7 +8,7 @@
   <div #content id="content" name="content" class="message-container" angular2-auto-scroll lock-y-offset="10" observe-attributes >
     <div class="message" *ngFor="let message of messages | async">
       <div class="message-blob normal-message">
-        <div class="owner">{{message.owner}}</div>
+        <div class="owner">{{getName(message.owner)}}</div>
         <div class="text">{{message.text}}</div>
       </div>
     </div>

@@ -1,59 +1,59 @@
-import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Content } from 'ionic-angular';
-
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import { Component, ViewChild } from "@angular/core";
+import { NavController, NavParams, Content } from "ionic-angular";
+import { AngularFireDatabase } from "angularfire2/database";
+import { Observable } from "rxjs/Observable";
+import { MemberModel } from "./member-model";
+import { List } from "ionic-angular/components/list/list";
+import { MemberProvider } from "../../providers/member/member";
 
 @Component({
-  selector: 'page-chat',
-  templateUrl: 'chat.html',
+  selector: "page-chat",
+  templateUrl: "chat.html",
+  providers: [MemberProvider]
 })
 export class ChatPage {
-
-  @ViewChild('content') content:any;
+  @ViewChild("content") content: any;
 
   messages: Observable<any[]>;
-  members: Observable<any[]>;
+  members;
 
   localNames: any[];
   message: string = "";
 
   chatInfo = {
-    chatId: 0, 
+    chatId: 0,
     chatName: "..."
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public db: AngularFireDatabase,
+    public memberProvider: MemberProvider
+  ) {
+    this.getMemberList().then(r=>this.members = r);
+    
     this.chatInfo.chatId = navParams.data.chatId;
     // this.chatInfo.chatName = navParams.data.chatName;
     this.messages = db.list("messages/" + this.chatInfo.chatId).valueChanges();
-    this.members = db.list("members").valueChanges();
   }
-
   
-  ionViewDidLoad()
-  {
-      console.log( this.content.nativeElement);
-
-     setTimeout(() => {
-      this.content.nativeElement.scrollTo(100, 100);
-     }, 1000);
+  async getMemberList() {
+    return await this.memberProvider.getMembers().then(res => res);
   }
 
-  getMember(id: any) {
-
-    //  this.db.object("members/" + id).valueChanges().take(1).subscribe(function (asd: any) {
-    //     this.localNamesasd.name;
-    // });
-
-    return this.members[id];
+  getName(id: number) {
+    var user = this.members.find((el)=>{
+      return el.id = id;
+    });
+    return user?user.name:"";
   }
 
-
-  sendMessage(){
+  sendMessage() {
     let messageId = new Date().getTime();
-    const itemRef = this.db.object("messages/" + this.chatInfo.chatId + "/" + messageId);
+    const itemRef = this.db.object(
+      "messages/" + this.chatInfo.chatId + "/" + messageId
+    );
     itemRef.set({ id: new Date().getTime(), owner: 0, text: this.message });
   }
-
 }
