@@ -4,7 +4,7 @@
     .message{
         width: 100%;
 
-        .message-blob {    
+        .message-blob {
             width: 70%;
             background: #e8e8e8;
             position: relative;
@@ -17,6 +17,7 @@
         }
 
         .message-blob.normal-message{
+            float: left;
             border-radius: 10px 10px 10px 0px;
         }
 
@@ -25,7 +26,7 @@
             border-radius: 10px 10px 0px 10px;
         }
 
-        .message-blob.normal-message:before {
+       .message-blob.normal-message:before {
             content: "";
             position: absolute;
             right: 100%;

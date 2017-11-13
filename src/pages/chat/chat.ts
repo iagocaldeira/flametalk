@@ -1,14 +1,18 @@
-import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Content } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
+
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'page-chat',
   templateUrl: 'chat.html',
 })
 export class ChatPage {
+  @ViewChild(Content) content: Content;
 
   messages: Observable<any[]>;
   members: Observable<any[]>;
@@ -21,7 +25,7 @@ export class ChatPage {
     chatName: "..."
   };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public db: AngularFireDatabase) {
+  constructor(public navParams: NavParams, public db: AngularFireDatabase, public authService: AuthService) {
     this.chatInfo.chatId = navParams.data.chatId;
     // this.chatInfo.chatName = navParams.data.chatName;
     this.messages = db.list("messages/" + this.chatInfo.chatId).valueChanges();
@@ -31,7 +35,9 @@ export class ChatPage {
   ionViewDidLoad() {
   }
 
-
+  isMyMessage(message){
+    return message.owner == this.authService.getUserId();
+  }
 
   getMember(id: any) {
 
@@ -42,11 +48,18 @@ export class ChatPage {
     return this.members[id];
   }
 
+  talvezSend(e){
+    if(e.keyCode == 13){
+      this.sendMessage();
+    }
+  }
 
   sendMessage(){
     let messageId = new Date().getTime();
     const itemRef = this.db.object("messages/" + this.chatInfo.chatId + "/" + messageId);
-    itemRef.set({ id: new Date().getTime(), owner: 0, text: this.message });
+    itemRef.set({ id: new Date().getTime(), owner: this.authService.getUserId(), text: this.message });
+    this.content.scrollToBottom();
+    this.message = "";
   }
 
 }
