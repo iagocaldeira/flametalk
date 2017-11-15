@@ -5,12 +5,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { ChatPage } from '../pages/chat/chat';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { AuthService } from '../services/auth';
+
 import 'rxjs/add/operator/take';
 import { MemberProvider } from '../providers/member/member';
 export const firebaseConfig = {
@@ -25,6 +29,7 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     MyApp,
+    LoginPage,
     HomePage,
     ChatPage
   ],
@@ -38,6 +43,7 @@ export const firebaseConfig = {
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    LoginPage,
     HomePage,
     ChatPage
   ],
@@ -45,6 +51,7 @@ export const firebaseConfig = {
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService,
     MemberProvider
   ]
 })

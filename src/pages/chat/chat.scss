@@ -59,7 +59,7 @@ page-chat{
     .message{
         width: 100%;
 
-        .message-blob {    
+        .message-blob {
             width: 70%;
             background: rgba(255, 255, 255, 0.17);
             position: relative;
@@ -72,6 +72,7 @@ page-chat{
         }
 
         .message-blob.normal-message{
+            float: left;
             border-radius: 10px 10px 10px 0px;
         }
 
@@ -80,7 +81,7 @@ page-chat{
             border-radius: 10px 10px 0px 10px;
         }
 
-        .message-blob.normal-message:before {
+       .message-blob.normal-message:before {
             content: "";
             position: absolute;
             right: 100%;
