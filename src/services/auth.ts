@@ -15,8 +15,28 @@ export class AuthService {
     this.user = firebaseAuth.authState;
   }
 
+  getCurrentUser(){
+    var user = firebase.auth().currentUser;
+
+    if(user != null){
+      return {
+        name: user.displayName,
+        email: user.email,
+        photoUrl: user.photoURL,
+        emailVerified: user.emailVerified,
+        uid: user.uid
+      };
+    }
+  }
+
   getUserId(){
-    return "B8mrDfI78WO2Yav3UE1ZvY802zV2";//this.user.uid;
+    var currentUser = this.getCurrentUser();
+    return currentUser ? currentUser.uid : null;
+  }
+
+  getUserName(){
+    var currentUser = this.getCurrentUser();
+    return currentUser ? currentUser.name || currentUser.emailVerified : null;
   }
 
   showErrorAlert(errMessage){
@@ -37,7 +57,7 @@ export class AuthService {
       })
       .catch(err => {
         this.showErrorAlert(err.message);
-      });    
+      });
   }
 
   login(email: string, password: string) {

@@ -1,9 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
-import { NavController, NavParams, Content } from "ionic-angular";
+import { NavController, NavParams } from "ionic-angular";
 import { AngularFireDatabase } from "angularfire2/database";
 import { Observable } from "rxjs/Observable";
-import { MemberModel } from "./member-model";
-import { List } from "ionic-angular/components/list/list";
 import { MemberProvider } from "../../providers/member/member";
 import { AuthService } from '../../services/auth';
 
@@ -35,8 +33,13 @@ export class ChatPage {
   ) {
     this.getMemberList().then(r=>this.members = r);
     this.chatInfo.chatId = navParams.data.chatId;
-    // this.chatInfo.chatName = navParams.data.chatName;
     this.messages = db.list("messages/" + this.chatInfo.chatId).valueChanges();
+    db.object("rooms/" + this.chatInfo.chatId)
+      .valueChanges()
+      .take(1)
+      .subscribe((chatInfo: any) => {
+        this.chatInfo.chatName = chatInfo.name;
+      });
   }
 
   async getMemberList() {
@@ -48,6 +51,10 @@ export class ChatPage {
       return el.id = id;
     });
     return user ? user.name : "";
+  }
+
+  isMyMessage(message){
+    return message.owner == this.authService.getUserId();
   }
 
   sendMessage() {
@@ -64,11 +71,7 @@ export class ChatPage {
     this.message = "";
   }
 
-  isMyMessage(message){
-    return message.owner == this.authService.getUserId();
-  }
-
-  talvezSend(e){
+  sendMessageOnEnter(e){
     if(e.keyCode == 13){
       this.sendMessage();
     }
