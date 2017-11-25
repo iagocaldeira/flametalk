@@ -31,7 +31,9 @@ export class ChatPage {
     public memberProvider: MemberProvider,
     public authService: AuthService
   ) {
-    this.getMemberList().then(r=>this.members = r);
+    this.getMemberList().then(r =>
+      this.members = r
+    );
     this.chatInfo.chatId = navParams.data.chatId;
     this.messages = db.list("messages/" + this.chatInfo.chatId).valueChanges();
     db.object("rooms/" + this.chatInfo.chatId)
@@ -48,9 +50,9 @@ export class ChatPage {
 
   getName(id: number) {
     var user = this.members.find((el)=>{
-      return el.id = id;
+      return el.id == id;
     });
-    return user ? user.name : "";
+    return user ? user.name : id;
   }
 
   isMyMessage(message){

@@ -11,7 +11,6 @@ export class AuthService {
   user: Observable<firebase.User>;
 
   constructor(private firebaseAuth: AngularFireAuth, public alertCtrl: AlertController) {
-    let self = this;
     this.user = firebaseAuth.authState;
   }
 
