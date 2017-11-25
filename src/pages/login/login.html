@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-list *ngIf="authService.user | async">
+    <button ion-button block (click)="logout()" *ngIf="authService.user | async">
+      Logout
+    </button>
+  </ion-list>
+
+  <ion-list *ngIf="!(authService.user | async)">
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="password"></ion-input>
+    </ion-item>
+    <button ion-button block (click)="login()" [disabled]="!email || !password">
+      Login
+    </button>
+    <button ion-button block (click)="signup()" [disabled]="!email || !password">
+      Signup
+    </button>
+
+
+  </ion-list>
+
+</ion-content>
